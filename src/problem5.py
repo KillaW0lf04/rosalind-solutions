@@ -18,43 +18,8 @@ allows for a default error of 0.001 in all decimal answers unless otherwise stat
 absolute error below.
 """
 
-from collections import Counter
+from utils import read_fasta, gc_content
 
-
-def gc_content(sequence):
-    count = Counter(sequence)
-
-    return (count['G'] + count['C']) / float(len(sequence))
-
-
-def read_fasta(path):
-
-    sequences = {}
-
-    current_id = None
-    current_seq = None
-
-    with open(path) as f:
-
-        data = f.readline()
-        while data:
-
-            if data.startswith('>'):
-                if current_id:
-                    sequences[current_id] = current_seq
-
-                current_id = data[1:].rstrip()
-                current_seq = ''
-            else:
-                current_seq += data.rstrip()
-
-            data = f.readline()
-
-    # Add any left over sequence data
-    if current_id:
-        sequences[current_id] = current_seq
-
-    return sequences
 
 if __name__ == '__main__':
     sequences = read_fasta('data/rosalind_gc.txt')

@@ -9,21 +9,12 @@ Given: A DNA string s of length at most 1000 bp.
 Return: The reverse complement sc of s.
 """
 
-if __name__ == '__main__':
+from utils import reverse_complementg
 
-    inverse = {
-        'A': 'T',
-        'T': 'A',
-        'C': 'G',
-        'G': 'C',
-        '\n': '',
-    }
+
+if __name__ == '__main__':
 
     with open('data/rosalind_revc.txt') as f:
         sequence = f.read()
 
-    complement = ''
-    for N in sequence:
-        complement = inverse[N] + complement
-
-    print complement
+    print reverse_complement(sequence)

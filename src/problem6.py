@@ -7,9 +7,7 @@ Given: Two DNA strings s and t of equal length (not exceeding 1 kbp).
 Return: The Hamming distance dH(s,t).
 """
 
-
-def distance(s1, s2):
-    return sum([1 for c1, c2 in zip(s1, s2) if c1 != c2])
+from utils import distance
 
 
 if __name__ == '__main__':
