@@ -18,6 +18,14 @@ allows for a default error of 0.001 in all decimal answers unless otherwise stat
 absolute error below.
 """
 
+from collections import Counter
+
+
+def gc_content(sequence):
+    count = Counter(sequence)
+
+    return (count['G'] + count['C']) / float(len(sequence))
+
 
 def read_fasta(path):
 
@@ -49,4 +57,17 @@ def read_fasta(path):
     return sequences
 
 if __name__ == '__main__':
-    print read_fasta('data/fasta_test.txt')
+    sequences = read_fasta('data/fasta_test.txt')
+
+    max_gc = 0
+    max_id = None
+
+    for id, s in sequences.items():
+        gc = gc_content(s)
+
+        if gc > max_gc:
+            max_gc = gc
+            max_id = id
+
+    print max_id
+    print max_gc * 100
