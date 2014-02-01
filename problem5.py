@@ -57,7 +57,7 @@ def read_fasta(path):
     return sequences
 
 if __name__ == '__main__':
-    sequences = read_fasta('data/fasta_test.txt')
+    sequences = read_fasta('data/rosalind_gc.txt')
 
     max_gc = 0
     max_id = None
