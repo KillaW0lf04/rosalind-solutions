@@ -21,6 +21,18 @@ GENETIC_CODE = {
 }
 
 
+def nt2aa(s):
+    aa_sequence = ''
+
+    for i in xrange(len(s)/3):
+        codon = s[i * 3: (i + 1) * 3]
+        value = GENETIC_CODE[codon]
+
+        if not value:
+            return aa_sequence
+        else:
+            aa_sequence += value
+
 
 def distance(s1, s2):
     return sum([1 for c1, c2 in zip(s1, s2) if c1 != c2])
