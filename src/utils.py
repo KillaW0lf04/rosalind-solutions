@@ -1,5 +1,9 @@
+import numpy as np
+
 from collections import Counter
 
+PROFILE_INDEX = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+REVERSE_PROFILE_INDEX = ['A', 'C', 'G', 'T']  # Reversed profile index
 
 GENETIC_CODE = {
     'UUU': 'F',      'CUU': 'L',      'AUU': 'I',      'GUU': 'V',
@@ -32,6 +36,34 @@ def nt2aa(s):
             return aa_sequence
         else:
             aa_sequence += value
+
+
+def generate_profile(data):
+
+    m = len(PROFILE_INDEX)
+    n = len(data[data.keys()[0]])  # Length of the DNA Sequences
+
+    profile = np.zeros(shape=(m, n))
+
+    for id in data.keys():
+        sequence = data[id]
+
+        for j in xrange(n):
+            i = PROFILE_INDEX[sequence[j]]
+            profile[i, j] += 1
+
+    return profile
+
+
+def generate_consensus(profile):
+    m, n = profile.shape
+    result = ''
+
+    for i in xrange(n):
+        index = np.argmax(profile[:, i])
+        result += REVERSE_PROFILE_INDEX[index]
+
+    return result
 
 
 def distance(s1, s2):
